@@ -30,19 +30,42 @@ function render(variables = {}) {
   if (variables.includeCover == false) cover = "<div class='cover'></div>";
 
   // reset the website body with the new html output
-  document.querySelector("#widget_content").innerHTML = `<div class="widget">
-            ${cover}
-          <img src="${variables.avatarURL}" class="photo" />
-          <h1>Lucy Boilett</h1>
-          <h2>Web Developer</h2>
-          <h3>Miami, USA</h3>
-          <ul class="position-right">
-            <li><a href="https://twitter.com/4geeksacademy"><i class="fab fa-twitter"></i></a></li>
-            <li><a href="https://github.com/4geeksacademy"><i class="fab fa-github"></i></a></li>
-            <li><a href="https://linkedin.com/school/4geeksacademy"><i class="fab fa-linkedin"></i></a></li>
-            <li><a href="https://instagram.com/4geeksacademy"><i class="fab fa-instagram"></i></a></li>
-          </ul>
-        </div>
+  document.querySelector(
+    "#widget_content"
+  ).innerHTML = `<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<div class="relative m-auto mt-8 flex h-[450px] w-[350px] flex-col rounded-xl bg-white shadow">
+  <div class="relative h-1/2 bg-red-500 rounded-t-xl bg-[url(${
+    variables.background
+  })] bg-center bg-cover bg-no-repeat" >
+
+      <div class="absolute bottom-0 ${
+        variables.socialMediaPosition === "position-left"
+          ? "right-full"
+          : "left-full"
+      } top-0 flex flex-col justify-center text-2xl"	>
+      ${
+        variables.twitter
+          ? '<a class="hover:bg-cyan-500 bg-cyan-300 p-1.5 text-white border-b-[1px] border-b-cyan-400" href="http://www.twitter.com"><i class="fa-brands fa-twitter""></i></a>'
+          : ""
+      }
+        <a class="hover:bg-cyan-500 bg-cyan-300 p-1.5 text-white border-b-[1px] border-b-cyan-400" href="http://www.instagram.com"><i class="fa-brands fa-instagram"></i></a>
+        <a class="hover:bg-cyan-500 bg-cyan-300 p-1.5 text-white border-b-[1px] border-b-cyan-400" href="http://www.linkedin.com"><i class="fa-brands fa-linkedin"></i></a>
+        <a class="hover:bg-cyan-500 bg-cyan-300 p-1.5 text-white border-b-[1px] border-b-cyan-400" href="http://www.github.com"><i class="fa-brands fa-github"></i></a>
+      </div>
+  </div>
+  <div class="flex h-1/2 flex-col items-center justify-center">
+    <div class="text-center text-3xl">${variables.name ||
+      ""} ${variables.lastName || ""} </div>
+    <div class="font-normal text-center text-2xl text-gray-400">Web Developer</div>
+    <div class="text-center text-2xl text-gray-400">Miami, USA</div>
+  </div>
+    <div class="absolute left-0 right-0 top-[35%] flex flex-row justify-center">
+      <img src="https://randomuser.me/api/portraits/men/42.jpg" class="h-32 w-32 rounded-full border-8 border-white" />
+    </div>
+  </div>
+</div>
+
     `;
 }
 
@@ -50,6 +73,9 @@ function render(variables = {}) {
  * Don't change any of the lines below, here is where we do the logic for the dropdowns
  */
 window.onload = function() {
+  document.querySelectorAll("input, select").forEach(elem => {
+    elem.className = "border border-black p-2 rounded-md";
+  });
   window.variables = {
     // if includeCover is true the algorithm should show the cover image
     includeCover: true,
