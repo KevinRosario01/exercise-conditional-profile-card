@@ -49,16 +49,30 @@ function render(variables = {}) {
           ? '<a class="hover:bg-cyan-500 bg-cyan-300 p-1.5 text-white border-b-[1px] border-b-cyan-400" href="http://www.twitter.com"><i class="fa-brands fa-twitter""></i></a>'
           : ""
       }
-        <a class="hover:bg-cyan-500 bg-cyan-300 p-1.5 text-white border-b-[1px] border-b-cyan-400" href="http://www.instagram.com"><i class="fa-brands fa-instagram"></i></a>
-        <a class="hover:bg-cyan-500 bg-cyan-300 p-1.5 text-white border-b-[1px] border-b-cyan-400" href="http://www.linkedin.com"><i class="fa-brands fa-linkedin"></i></a>
-        <a class="hover:bg-cyan-500 bg-cyan-300 p-1.5 text-white border-b-[1px] border-b-cyan-400" href="http://www.github.com"><i class="fa-brands fa-github"></i></a>
-      </div>
+      ${
+        variables.instagram
+          ? '<a class="hover:bg-cyan-500 bg-cyan-300 p-1.5 text-white border-b-[1px] border-b-cyan-400" href="http://www.instagram.com"><i class="fa-brands fa-instagram"></i></a>'
+          : ""
+      }
+    ${
+      variables.linkedin
+        ? '<a class="hover:bg-cyan-500 bg-cyan-300 p-1.5 text-white border-b-[1px] border-b-cyan-400" href="http://www.linkedin.com"><i class="fa-brands fa-linkedin"></i></a>'
+        : ""
+    }
+    ${
+      variables.github
+        ? '<a class="hover:bg-cyan-500 bg-cyan-300 p-1.5 text-white border-b-[1px] border-b-cyan-400" href="http://www.github.com"><i class="fa-brands fa-github"></i></a>'
+        : ""
+    }
+          </div>
   </div>
   <div class="flex h-1/2 flex-col items-center justify-center">
     <div class="text-center text-3xl">${variables.name ||
       ""} ${variables.lastName || ""} </div>
-    <div class="font-normal text-center text-2xl text-gray-400">Web Developer</div>
-    <div class="text-center text-2xl text-gray-400">Miami, USA</div>
+    <div class="font-normal text-center text-2xl text-gray-400">${variables.role ||
+      ""}</div>
+    <div class="text-center text-2xl text-gray-400">${variables.city ||
+      ""}, ${variables.country || ""}</div>
   </div>
     <div class="absolute left-0 right-0 top-[35%] flex flex-row justify-center">
       <img src="https://randomuser.me/api/portraits/men/42.jpg" class="h-32 w-32 rounded-full border-8 border-white" />
@@ -73,9 +87,6 @@ function render(variables = {}) {
  * Don't change any of the lines below, here is where we do the logic for the dropdowns
  */
 window.onload = function() {
-  document.querySelectorAll("input, select").forEach(elem => {
-    elem.className = "border border-black p-2 rounded-md";
-  });
   window.variables = {
     // if includeCover is true the algorithm should show the cover image
     includeCover: true,
