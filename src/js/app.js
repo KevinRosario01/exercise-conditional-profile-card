@@ -26,18 +26,16 @@ function render(variables = {}) {
   console.log("These are the current variables: ", variables); // print on the console
   // here we ask the logical questions to make decisions on how to build the html
   // if includeCover==false then we reset the cover code without the <img> tag to make the cover transparent.
-  let cover = `<div class="cover"><img src="${variables.background}" /></div>`;
-  if (variables.includeCover == false) cover = "<div class='cover'></div>";
-
+  let cover = `${variables.background}`;
+  if (variables.includeCover == false) cover = "";
+  console.log(cover);
   // reset the website body with the new html output
   document.querySelector(
     "#widget_content"
   ).innerHTML = `<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 <div class="relative m-auto mt-8 flex h-[450px] w-[350px] flex-col rounded-xl bg-white shadow">
-  <div class="relative h-1/2 bg-red-500 rounded-t-xl bg-[url(${
-    variables.background
-  })] bg-center bg-cover bg-no-repeat" >
+  <div class="relative h-1/2 bg-red-500 rounded-t-xl bg-[url(${cover})] bg-center bg-cover bg-no-repeat" >
 
       <div class="absolute bottom-0 ${
         variables.socialMediaPosition === "position-left"
@@ -87,6 +85,10 @@ function render(variables = {}) {
  * Don't change any of the lines below, here is where we do the logic for the dropdowns
  */
 window.onload = function() {
+  document.querySelectorAll("input, select").forEach(elem => {
+    elem.classList.add("border", "border-black", "p2", "rounded-md");
+  });
+
   window.variables = {
     // if includeCover is true the algorithm should show the cover image
     includeCover: true,
